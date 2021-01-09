@@ -1,17 +1,19 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-const Post =  ({ posts }) => {
+const Post =  ({ posts, id }) => {
   const router = useRouter()
   
   if (router.isFallback) {
     return  <div>loading...........</div>
   }
-  return <div className="border">
-          <h3>{ posts.title}</h3> 
-          <p>{ posts.body }</p>
-      </div>
+  return <div>
+            <img src={ parseInt(id) < 5 ? "/images/post/"+id+".jpg" : "/images/post/1.jpg"} style={{width:"350px", height:"200px"}}/>
+            <h3>{ posts.title}</h3> 
+            <p>{ posts.body }</p>
+          </div>
 }
+
 export async function getStaticPaths() {
     const paths = ["/posts/1", "/posts/2"]
   return {paths, fallback: true}
@@ -24,7 +26,8 @@ export async function getStaticProps ({query, params}) {
 
   return {
       props: {
-          posts
+          posts,
+          id
       }
   }
 }

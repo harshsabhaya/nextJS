@@ -1,18 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
-import styled from './post.module.scss'
+import styled from '../post.module.scss'
 
-const Post = (props) => {
-    const { post } = props
+const Post = ({id, title, body}) => {
     return ( 
-        <li>
-            <Link href="/posts/[id]" as={"/posts/" + post.id}>
-                <h3 className={styled.postHeading}> 
-                    <a> {post.title} </a> 
+        <>
+            <img src={ parseInt(id) < 5 ? "/images/post/"+id+".jpg" : "/images/post/1.jpg"} style={{width:"90%", height:"25vh"}}/>
+            <Link href="/posts/[id]" as={"/posts/" + id}>
+                <h3 className="mt-3"> 
+                    <a> {title} </a> 
                 </h3>
             </Link>
-            <p>{post.body}</p>
-        </li>)
+            <p>{body}</p>
+        </>)
 }
 
 export default Post
